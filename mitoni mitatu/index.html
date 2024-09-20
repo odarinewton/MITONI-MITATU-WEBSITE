@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mitoni Mitatu Secondary School</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-top: 50px;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        input, button {
+            padding: 10px;
+            width: 100%;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #333;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container" id="loginContainer">
+    <h1>Login to Mitoni Mitatu Secondary School</h1>
+    <form id="loginForm">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+    </form>
+    <div id="loginMessage"></div>
+</div>
+
+<div class="container" id="admissionContainer" style="display:none;">
+    <h1>Admission Form</h1>
+    <form id="admissionForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required>
+        <label for="age">Age</label>
+        <input type="number" id="age" name="age" required>
+        <label for="grade">Grade</label>
+        <input type="text" id="grade" name="grade" required>
+        <button type="submit">Submit</button>
+    </form>
+    <div id="admissionMessage"></div>
+</div>
+
+<div class="container" id="activitiesContainer" style="display:none;">
+    <h1>School Activities</h1>
+    <ul id="activitiesList"></ul>
+</div>
+
+<div class="container" id="staffContainer" style="display:none;">
+    <h1>Our Staff</h1>
+    <ul id="staffList"></ul>
+</div>
+
+<div class="container" id="updateContainer" style="display:none;">
+    <h1>School Updates</h1>
+    <ul id="updatesList"></ul>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const loginContainer = document.getElementById("loginContainer");
+        const admissionContainer = document.getElementById("admissionContainer");
+        const activitiesContainer = document.getElementById("activitiesContainer");
+        const staffContainer = document.getElementById("staffContainer");
+        const updateContainer = document.getElementById("updateContainer");
+
+        // Handle login form
+        const loginForm = document.getElementById("loginForm");
+        if (loginForm) {
+            loginForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                if (username === "admin" && password === "password") {
+                    loginContainer.style.display = "none";
+                    admissionContainer.style.display = "block";  // Show admission page
+                } else {
+                    document.getElementById("loginMessage").textContent = "Invalid login credentials!";
+                }
+            });
+        }
+
+        // Handle admission form
+        const admissionForm = document.getElementById("admissionForm");
+        if (admissionForm) {
+            admissionForm.addEventListener("submit", function (e) {
+                e.preventDefault();
+                const name = document.getElementById("name").value;
+                const age = document.getElementById("age").value;
+                const grade = document.getElementById("grade").value;
+                document.getElementById("admissionMessage").textContent = `Student ${name} admitted successfully!`;
+            });
+        }
+
+        // Display activities
+        const activitiesList = document.getElementById("activitiesList");
+        if (activitiesList) {
+            const activities = ["Sports Day", "Science Fair", "Cultural Festival"];
+            activities.forEach(activity => {
+                const li = document.createElement("li");
+                li.textContent = activity;
+                activitiesList.appendChild(li);
+            });
+        }
+
+        // Display staff
+        const staffList = document.getElementById("staffList");
+        if (staffList) {
+            const staff = ["John Doe - Principal", "Jane Smith - Teacher", "Alice Johnson - Counselor"];
+            staff.forEach(member => {
+                const li = document.createElement("li");
+                li.textContent = member;
+                staffList.appendChild(li);
+            });
+        }
+
+        // Display updates
+        const updatesList = document.getElementById("updatesList");
+        if (updatesList) {
+            const updates = ["School reopening on 10th Sept", "Parent-Teacher meeting on 15th Sept"];
+            updates.forEach(update => {
+                const li = document.createElement("li");
+                li.textContent = update;
+                updatesList.appendChild(li);
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
